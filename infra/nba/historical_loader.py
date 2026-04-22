@@ -63,7 +63,7 @@ class HistoricalLoader:
         CBBpy scrapes ESPN — uses ~1.5s delay.
     """
 
-    def __init__(self, db_path: str, delay_seconds: float = 0.65) -> None:
+    def __init__(self, db_path: str, delay_seconds: float = 3.0) -> None: # bumped from delay of 0.65
         self.db_path = db_path
         self.delay = delay_seconds
 
@@ -154,7 +154,7 @@ class HistoricalLoader:
             # Fetch play-by-play
             logger.info("  %s | %s | %s", game_id, matchup, game_date)
             try:
-                pbp_raw = playbyplayv3.PlayByPlayV3(game_id=game_id, timeout=30)
+                pbp_raw = playbyplayv3.PlayByPlayV3(game_id=game_id, timeout=60) # increased the timeout to 60 seconds
                 pbp_df = pbp_raw.get_data_frames()[0]
             except Exception as exc:
                 logger.warning("  Failed to fetch PBP for %s: %s", game_id, exc)
