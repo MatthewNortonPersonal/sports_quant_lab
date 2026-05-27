@@ -232,7 +232,7 @@ class HistoricalLoader:
                 if h and a and h != "nan" and a != "nan":
                     home_score = int(h)
                     away_score = int(a)
-                    margin = home_score - away_score
+                    margin = home_score - away_score # important to note -- margin = home - away
             except (ValueError, TypeError):
                 pass
 
